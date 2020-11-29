@@ -25,13 +25,18 @@ with open(csvpath) as csvfile:
         value = (len(list(csvfile))) + 1 
     print(value)
 
+# create empty lists for the following variables
 total_months = []
 total_profit = []
 monthly_profit_change = []
 
+# open csv file
 with open(csvpath) as csvfile:
+    # store the contents of the csv file in the variable csvreader
     csvreader = csv.reader(csvfile, delimiter=",")
+    # skip the header row
     header = next(csvreader)
+    # loop through the rows stored in csvreader
     for row in csvreader:
         # Append the total months and total profit to their corresponding lists
         total_months.append(row[0])
@@ -57,4 +62,26 @@ print(f"Average Change: {round(sum(monthly_profit_change)/len(monthly_profit_cha
 print(f"Greatest Increase in Profits: {total_months[max_increase_month]} (${(str(max_increase_value))})")
 print(f"Greatest Decrease in Profits: {total_months[max_decrease_month]} (${(str(max_decrease_value))})")
         
+# Specify the file to write to
+output_path = os.path.join("..", "PyBank", "Analysis", "file.txt")
 
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(output_path, 'w') as file:
+    
+    file.write("```text")
+    file.write("\n")
+    file.write("Financial Analysis")
+    file.write("\n")
+    file.write("----------------------------")
+    file.write("\n")
+    file.write(f"Total Months: {len(total_months)}")
+    file.write("\n")
+    file.write(f"Total: ${sum(total_profit)}")
+    file.write("\n")
+    file.write(f"Average Change: {round(sum(monthly_profit_change)/len(monthly_profit_change),2)}")
+    file.write("\n")
+    file.write(f"Greatest Increase in Profits: {total_months[max_increase_month]} (${(str(max_increase_value))})")
+    file.write("\n")
+    file.write(f"Greatest Decrease in Profits: {total_months[max_decrease_month]} (${(str(max_decrease_value))})")
+    file.write("\n")
+    file.write("```")
