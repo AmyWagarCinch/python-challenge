@@ -16,7 +16,6 @@ with open(csvpath) as csvfile:
 
 # create variables to store data
 total_votes = []
-candidates = []
 voter_id = []
 candidate = []
 candidate_names = []
@@ -38,6 +37,35 @@ with open(csvpath) as csvfile:
     for row in candidate: 
         if row not in candidate_names:
             candidate_names.append(row)
-            
+    # Count each candidate's votes and calculate percentage
+    for name in candidate_names:
+        count = 0
+        for row in candidate:
+            if name == row:
+                count += 1
+                percent = float(count) / float(total_votes) * 100
+            if count > winner:
+                winner = count
+                winner_candidate = name
+        # Insert data into the lists
+        percentage.append(percent)
+        vote_count.append(count)
 
-print(f"Total Votes Cast: {len(total_votes)}")
+        # Obtain the name's indexes for corresponding percentage and count variables
+        x = candidate_names.index(name)
+        
+                
+print("Election Results")
+print("\n")
+print("----------------------")
+print("\n")
+print(f"Total Votes: {len(total_votes)}")
+print("\n")
+print("----------------------")
+print("\n")
+print("f"{candidate_names[x]}: {percentage[x]:.3f}% ({vote_count[x]})\n"")
+print("\n")
+print("----------------------")
+print(f"Winner: {winner_candidate}")
+print("\n")
+print("----------------------")
