@@ -9,21 +9,10 @@ with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     header = next(csvreader)
     
-    #Loop through looking for the ___
-    for row in csvreader:
-        print(row)
-        break
-
+    
 # create variables to store data
 total_votes = 0
-#voter_id = []
-#candidate = []
-#candidate_names = []
-#percentage = []
-#vote_count = []
-#winner = 0
-#winner_candidate = ""
-currentCandidate = "" # holds current candidates name
+currentCandidate = "" # current candidates name
 candidateVotes = {} # has key value pair of each candidate & their votes
 candidates = [] # has list of all candidates names
 
@@ -39,32 +28,24 @@ with open(csvpath) as csvfile:
         currentCandidate = row["Candidate"]
 
         if currentCandidate not in candidates:
-            # this is new candidate hence add him in the list of candidates
+            # this is new candidate hence add them in the list of candidates
             candidates.append(currentCandidate)
 
-            # also set his voting count to 1
+            # also set the voting count to 1
             candidateVotes[currentCandidate] = 1
         else:
-            # he is already in the list just add his vote to the dictionary
+            # if they are already in the list just add the vote to the dictionary
             candidateVotes[currentCandidate] = candidateVotes[currentCandidate] + 1
-        
+   
       
                 
 print("Election Results")
-#print("\n")
 print("----------------------")
-#print("\n")
-#print(f"Total Votes: {len(total_votes)}")
 print(f"Total Votes: {total_votes}")
-#print("\n")
 print("----------------------")
-#print("\n")
 for cv in candidateVotes:
     print(cv + ": " + str(round(((candidateVotes[cv]/total_votes)*100),3)) + "%" + " (" + str(candidateVotes[cv]) + ")")
-#print("f"{candidate_names[x]}: {percentage[x]:.3f}% ({vote_count[x]})\n"")
-#print("\n")
 print("----------------------")
-#print(f"Winner: {winner_candidate}")
 # printing the winner 
 # get values from dictionary & get max value of it
 listVotes = list(candidateVotes.values())
@@ -75,7 +56,25 @@ print("\n")
 print("----------------------")
 
 # Specify the file to write to
-#output_path = os.path.join("..", "PyPoll", "Analysis", "file.txt")
+output_path = os.path.join("..", "PyPoll", "Analysis", "file.txt")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
-#with open(output_path, 'w') as file:
+with open(output_path, 'w') as file:
+    file.write("Election results:")
+    file.write("\n")
+    file.write("-------------------------------------")
+    file.write("\n")
+    file.write("Total Votes: " + str(total_votes))
+    file.write("\n")
+    file.write("-------------------------------------")
+    file.write("\n")
+    for cv in candidateVotes:
+        file.write(cv + ": " + str(round(((candidateVotes[cv]/total_votes)*100),6)) + "%" + " (" + str(candidateVotes[cv]) + ")") 
+        file.write("\n")
+    file.write("-------------------------------------")
+    file.write("\n")
+    file.write("Winner is " + str(list(candidateVotes.keys())[list(candidateVotes.values()).index(max(listVotes))]))
+    file.write("\n")
+    file.write("-------------------------------------")
+
+
