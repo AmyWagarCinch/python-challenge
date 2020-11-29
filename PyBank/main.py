@@ -11,19 +11,19 @@ with open(csvpath) as csvfile:
     header = next(csvreader)
 
     #The net total amount of "Profit/Losses" over the entire period
-    total_profit = 0
-    for row in csv.reader(csvfile):
-        total_profit += int(row[1])         
-    print(total_profit)
+    #total_profit = 0
+    #for row in csv.reader(csvfile):
+        #total_profit += int(row[1])         
+    #print(total_profit)
     
 #count the number of months
-with open(csvpath) as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
-    header = next(csvreader)
+#with open(csvpath) as csvfile:
+    #csvreader = csv.reader(csvfile, delimiter=",")
+    #header = next(csvreader)
     
-    for row in csv.reader(csvfile):        
-        value = (len(list(csvfile))) + 1 
-    print(value)
+    #for row in csv.reader(csvfile):        
+        #value = (len(list(csvfile))) + 1 
+    #print(value)
 
 # create empty lists for the following variables
 total_months = []
